@@ -1,5 +1,6 @@
 import React from 'react';
 import './footer.sass';
+import {Link} from 'react-router-dom';
 
 const AppFooter = () => {
     return (
@@ -9,15 +10,15 @@ const AppFooter = () => {
                   <div className="col-lg-5 offset-lg-4">
                       <ul className="footer">
                           <li className="footer__item">
-                              <a href="#">
-                                  <img src="../../logo/Logo_black.svg" alt="logo"/>
-                              </a>
+                            <Link to="/main">
+                                <img src="../../logo/Logo_black.svg" alt="logo"/>
+                            </Link>
                           </li>
                           <li className="footer__item">
-                              <a href="#">Our coffee</a>
+                            <Link to='/coffepage'>Our coffee</Link>
                           </li>
                           <li className="footer__item">
-                              <a href="#">For your pleasure</a>
+                            <Link to="/itempage">For your pleasure</Link>
                           </li>
                       </ul>
                   </div>

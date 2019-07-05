@@ -1,5 +1,6 @@
 import React from 'react';
 import './header.sass';
+import {Link} from 'react-router-dom';
 
 const AppHeader = () => {
     return (
@@ -8,15 +9,15 @@ const AppHeader = () => {
                     <header>
                         <ul className="header">
                             <li className="header__item">
-                                <a href="#">
+                                <Link to="/main">
                                     <img src="../../logo/Logo.svg" alt="logo"/>
-                                </a>
+                                </Link>
                             </li>
                             <li className="header__item">
-                                <a href="#">Our coffee</a>
+                                <Link to='/coffepage'>Our coffee</Link>
                             </li>
                             <li className="header__item">
-                                <a href="#">For your pleasure</a>
+                                <Link to="/itempage">For your pleasure</Link>
                             </li>
                         </ul>
                     </header>
