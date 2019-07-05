@@ -1,20 +1,21 @@
 import React from 'react';
+import './header.sass';
 
 const AppHeader = () => {
     return (
-        <div class="row">
-            <div class="col-lg-6">
+        <div className="row">
+            <div className="col-lg-6">
                     <header>
-                        <ul class="header">
-                            <li class="header__item">
+                        <ul className="header">
+                            <li className="header__item">
                                 <a href="#">
-                                    <img src="logo/Logo.svg" alt="logo"/>
+                                    <img src="../../logo/Logo.svg" alt="logo"/>
                                 </a>
                             </li>
-                            <li class="header__item">
+                            <li className="header__item">
                                 <a href="#">Our coffee</a>
                             </li>
-                            <li class="header__item">
+                            <li className="header__item">
                                 <a href="#">For your pleasure</a>
                             </li>
                         </ul>
