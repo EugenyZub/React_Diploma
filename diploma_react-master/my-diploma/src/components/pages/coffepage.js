@@ -1,7 +1,9 @@
 import React from 'react';
 import AppHeader from '../app-header';
-import './coffeepage.sass';
 import AppFooter from '../app-footer';
+
+import './coffeepage.sass';
+
 const CoffePage = () => {
     return (
         <>

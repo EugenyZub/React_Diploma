@@ -10,7 +10,7 @@ const AppFooter = () => {
                   <div className="col-lg-5 offset-lg-4">
                       <ul className="footer">
                           <li className="footer__item">
-                            <Link to="/main">
+                            <Link exact to="/">
                                 <img src="../../logo/Logo_black.svg" alt="logo"/>
                             </Link>
                           </li>
@@ -18,7 +18,7 @@ const AppFooter = () => {
                             <Link to='/coffepage'>Our coffee</Link>
                           </li>
                           <li className="footer__item">
-                            <Link to="/itempage">For your pleasure</Link>
+                            <Link to="/pleasure">For your pleasure</Link>
                           </li>
                       </ul>
                   </div>
