@@ -2,7 +2,7 @@ import React from 'react';
 
 const Error = () => {
     return (
-        console.log('Произошла ошибка')
+        <div className='whiteText'>Возникла непредвиденная ошибка!</div>
     )
 }
 

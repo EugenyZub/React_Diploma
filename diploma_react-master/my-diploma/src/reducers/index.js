@@ -1,30 +1,48 @@
 const initialState = {
-    menu: [],
+    items: [],
     loading: true,
     error: false
 }
 
 const reducer = (state = initialState, action) => {
+    console.log(11)
     switch (action.type) {
-        case 'MENU_LOADED': 
+        case 'ITEMS_LOADED': 
             return {
                 ...state,
-                menu: action.payload,
+                items: action.payload,
                 loading: false
-            }
-        case 'MENU_REQUESTED': 
+            };
+        case 'ITEMS_REQUESTED': 
             return {
                 ...state,
                 loading: true,
                 error: false
-            }
-        case 'MENU_ERROR': 
+            };
+        case 'ITEMS_ERROR': 
             return {
                 ...state,
                 loading: false,
                 error: true
-            }
+            };       
+        case 'ITEM_DETAILS': 
+            const id = action.payload;
+            console.log(id)  
+            // console.log(state.items) 
+            const item = state.items.find(item => item.id === id);
 
+            const newItem = {
+                name: item.name,
+                price: item.price,
+                url: item.url,
+                id: item.id
+            };
+            return {
+                ...state,
+                items: [
+                    newItem
+                ]
+            };
         default: 
             return state;
     }

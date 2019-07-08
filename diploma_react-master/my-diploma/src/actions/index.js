@@ -1,24 +1,32 @@
-const menuLoaded = (newMenu) => {
+const itemsLoaded = (newMenu) => {
     return {
-        type: 'MENU_LOADED',
+        type: 'ITEMS_LOADED',
         payload: newMenu
     };
 };
 
-const menuRequested = () => {
+const itemsRequested = () => {
     return {
-        type: 'MENU_REQUESTED'
+        type: 'ITEMS_REQUESTED'
     };
 };
 
-const menuError = () => {
+const itemsError = () => {
     return {
-        type: 'MENU_ERROR'
+        type: 'ITEMS_ERROR'
     };
 };
+
+const itemsDetails = (id) => {
+    return {
+        type: 'ITEM_DETAILS',
+        payload: id
+    }
+}
 
 export {
-    menuLoaded,
-    menuRequested,
-    menuError
+    itemsLoaded,
+    itemsRequested,
+    itemsError,
+    itemsDetails
 };

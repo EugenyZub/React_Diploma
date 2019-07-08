@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 // import AppFooter from '../app-footer';
-import AppHeader from '../app-header';
+// import AppHeader from '../app-header';
 // import About from '../about';
 // import Best from '../best';
-import {CoffePage, Main, Pleasure} from '../pages';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {CoffeePage, Main, Pleasure, ItemPage} from '../pages';
+// import {BrowserRouter as Router} from 'react-router-dom';
 // import './mainpage.sass';
 
 export default class App extends Component {
@@ -18,8 +18,9 @@ export default class App extends Component {
                         
                         <Switch>
                             <Route path='/' exact component={Main}/>
-                            <Route path='/coffepage' component={CoffePage}/>
+                            <Route path='/coffepage' component={CoffeePage}/>
                             <Route path='/pleasure' component={Pleasure}/>
+                            <Route path='/itempage' component={ItemPage}/>
                         </Switch>
                         {/* <div className="row">
                                 <div className="col-lg-10 offset-lg-1">

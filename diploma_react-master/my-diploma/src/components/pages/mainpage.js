@@ -18,7 +18,7 @@ const Main = () => {
                             <img className="beanslogo" src="logo/Beans_logo.svg" alt="Beans logo"/>
                             <div className="preview__subtitle">We makes every day full of energy and taste</div>
                             <div className="preview__subtitle">Want to try our beans?</div>
-                            <Link to="/itempage" className="preview__btn">More</Link>
+                            <Link to="/coffepage" className="preview__btn">More</Link>
                         </div>
                     </div>
                 </div>  
