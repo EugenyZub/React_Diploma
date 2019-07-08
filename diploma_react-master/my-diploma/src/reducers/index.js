@@ -1,7 +1,9 @@
 const initialState = {
     items: [],
     loading: true,
-    error: false
+    error: false,
+    value: '',
+    works: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +41,15 @@ const reducer = (state = initialState, action) => {
                 // items: [
                 //     newItem
                 // ]
+            };
+        case 'ITEM_SEACRCH':
+            const {value} = action;
+            console.log(value);
+            const works = state.items.filter(val => val.includes(value)); 
+            return {
+                ...state,
+                value,
+                works
             };
         default: 
             return state;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
 import WithDiplomaService from '../hoc';
-import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
+import {itemsLoaded, itemsRequested, itemsError, itemsDetails, searchForm} from '../../actions';
 import Spinner from '../spinner'
 import CofeeItemList from '../coffee-list-item';
 import {connect} from 'react-redux';
@@ -19,7 +19,7 @@ class CoffeePage extends Component {
     }
 
     render() {
-        const {coffeeItems, loading, error, itemsDetails} = this.props;
+        const {coffeeItems, loading, error, itemsDetails, value, works} = this.props;
         let id = 0; 
 
         if (loading) {
@@ -63,7 +63,11 @@ class CoffeePage extends Component {
                         <div className="line"></div>
                         <div className="row">
                             <div className="col-lg-4 offset-2">
-                                <form action="#" className="shop__search">
+                                <form
+                                    className="shop__search"
+                                    onChange={e => searchForm(e.target.value)}
+                                    value={value}
+                                >
                                     <label className="shop__search-label" forhtml="filter">Looking for</label>
                                     <input id="filter" type="text" placeholder="start typing here..." className="shop__search-input"/>
                                 </form>
@@ -74,9 +78,9 @@ class CoffeePage extends Component {
                                         Or filter
                                     </div>
                                     <div className="shop__filter-group">
-                                        <button className="shop__filter-btn">Brazil</button>
-                                        <button className="shop__filter-btn">Kenya</button>
-                                        <button className="shop__filter-btn">Columbia</button>
+                                        <button className="shop__filter-btn" >Brazil</button>
+                                        <button className="shop__filter-btn" >Kenya</button>
+                                        <button className="shop__filter-btn" >Columbia</button>
                                     </div>
                                 </div>
                             </div>
@@ -84,15 +88,16 @@ class CoffeePage extends Component {
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="shop__wrapper">
-                                    {
-                                        coffeeItems.map(coffeeItem => {
-                                            return <CofeeItemList 
-                                                key={id++}
-                                                coffeeItem={coffeeItem}
-                                                moreDetails={() => itemsDetails(coffeeItem.id)}
-                                            />
-                                        })
-                                    }
+                                    {   
+                                            
+                                            coffeeItems.map(coffeeItem => {
+                                                return <CofeeItemList 
+                                                    key={id++}
+                                                    coffeeItem={coffeeItem}
+                                                    moreDetails={() => itemsDetails(coffeeItem.id)}
+                                                />
+                                            })
+                                        }
                                 </div>
                             </div>
                         </div>
@@ -110,7 +115,9 @@ const mapStateToProps = (state) => {
     return {
         coffeeItems: state.items,
         loading: state.loading,
-        error: state.error
+        error: state.error,
+        value: state.works.value,
+        works: state.works.works
     }
 }
 
@@ -118,7 +125,8 @@ const mapDispatchToProps = {
     itemsLoaded,
     itemsRequested,
     itemsError,
-    itemsDetails
+    itemsDetails,
+    searchForm
 };
 
 export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(CoffeePage));

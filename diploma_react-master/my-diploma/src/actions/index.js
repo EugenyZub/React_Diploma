@@ -24,9 +24,17 @@ const itemsDetails = (id) => {
     }
 }
 
+const searchForm = (value) => {
+    return {
+        type: 'ITEM_SEACRCH',
+        value
+    }
+}
+
 export {
     itemsLoaded,
     itemsRequested,
     itemsError,
-    itemsDetails
+    itemsDetails,
+    searchForm
 };
