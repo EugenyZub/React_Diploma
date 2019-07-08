@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-    console.log(11)
     switch (action.type) {
         case 'ITEMS_LOADED': 
             return {
@@ -13,7 +12,7 @@ const reducer = (state = initialState, action) => {
                 items: action.payload,
                 loading: false
             };
-        case 'ITEMS_REQUESTED': 
+        case 'ITEMS_REQUESTED':
             return {
                 ...state,
                 loading: true,
@@ -26,22 +25,20 @@ const reducer = (state = initialState, action) => {
                 error: true
             };       
         case 'ITEM_DETAILS': 
-            const id = action.payload;
-            console.log(id)  
-            // console.log(state.items) 
-            const item = state.items.find(item => item.id === id);
+            //const id = action.payload;
+            //const item = state.items.find(item => item.id === id);
 
-            const newItem = {
-                name: item.name,
-                price: item.price,
-                url: item.url,
-                id: item.id
-            };
+            // const newItem = {
+            //     name: item.name,
+            //     price: item.price,
+            //     url: item.url,
+            //     id: item.id
+            // };
             return {
                 ...state,
-                items: [
-                    newItem
-                ]
+                // items: [
+                //     newItem
+                // ]
             };
         default: 
             return state;

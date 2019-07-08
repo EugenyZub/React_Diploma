@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
-import WithRestoService from '../hoc';
+import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
 import Spinner from '../spinner'
 import CofeeItemList from '../coffee-list-item';
@@ -12,8 +12,8 @@ import './coffeepage.sass';
 class CoffeePage extends Component {
     componentDidMount() {
         this.props.itemsRequested();
-        const {RestoService} = this.props;
-        RestoService.getCoffee()
+        const {DiplomaService} = this.props;
+        DiplomaService.getCoffee()
             .then(res => this.props.itemsLoaded(res))
             .catch(() => this.props.itemsError())
     }
@@ -121,4 +121,4 @@ const mapDispatchToProps = {
     itemsDetails
 };
 
-export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(CoffeePage));
+export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(CoffeePage));

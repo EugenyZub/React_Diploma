@@ -1,3 +1,3 @@
-import WithRestoService from "./with";
+import WithDiplomaService from "./with-diploma-service";
 
-export default WithRestoService;
+export default WithDiplomaService;

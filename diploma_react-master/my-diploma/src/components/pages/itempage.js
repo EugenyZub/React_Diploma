@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
-import WithRestoService from '../hoc';
-import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
+import WithDiplomaService from '../hoc';
+import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
 import {connect} from 'react-redux';
 import ItemDetails from '../itemDetails/';
 
@@ -17,7 +17,7 @@ class ItemPage extends Component {
 
     render() {
         const {itemsDetails} = this.props;
-        let id = 0;
+        //let id = 0;
 
         return (
             <>
@@ -32,8 +32,10 @@ class ItemPage extends Component {
                         <div className="row">
                             {
                                 itemsDetails.map(itemDetails => {
+                                    const id = itemDetails.url.slice(itemDetails.url.indexOf('I') + 2, itemDetails.url.indexOf('_') - 1);
+                                    console.log(itemDetails)
                                     return <ItemDetails 
-                                        key={id++}
+                                        key={id}
                                         itemDetails={itemDetails}
                                     />
                                 })
@@ -83,8 +85,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     itemsLoaded,
     itemsRequested,
-    itemsError,
+    itemsError
 };
 
-export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(ItemPage));
-// export default ItemPage;
+export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(ItemPage));

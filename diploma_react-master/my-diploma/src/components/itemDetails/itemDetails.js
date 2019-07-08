@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ItemDetails = ({itemDetails}) => {
-    
     const {name, url, price} = itemDetails;
 
     return (

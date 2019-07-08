@@ -1,30 +1,30 @@
 import React, {Component} from 'react';
 // import Spinner from '../spinner';
-// import Error from '../error';
+import Error from '../error';
 import {connect} from 'react-redux';
-import WithRestoService from '../hoc';
+import WithDiplomaService from '../hoc';
 // import {itemsDetails} from '../../actions';
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 class BestsellersListItem extends Component {
 
-    // componentDidCatch() {
-    //     return <Error/>
-    // }
+    componentDidCatch() {
+        return <Error/>
+    }
 
     render () {
         const {bestsellersItem, moreDetails} = this.props;
         // const view = error ? <Error/> : loading ? <Spinner/> : 
-        //             !(loading || error) && <View menuItem={menuItem}/>; 
+        //             !(loading || error) && <View bestsellersItem={bestsellersItem}/>; 
         return (
-            <div 
-                // to='/itempage'
+            <Link 
+                to='/itempage'
                 onClick={() => moreDetails()}
                 className="best__item" 
-                // style={{textDecoration: 'none'}}
+                style={{textDecoration: 'none'}}
             >
                 {/* {view} */}
                 <View bestsellersItem={bestsellersItem}/>
-            </div>
+            </Link>
         )
     }
 }
@@ -34,10 +34,10 @@ const View = ({bestsellersItem}) => {
     return (
         <>
             <img src={url} alt="name"/>
-                <div className="best__item-title">
-                    {name}
-                </div>
-                <div className="best__item-price">{price}</div>
+            <div className="best__item-title">
+                {name}
+            </div>
+            <div className="best__item-price">{price}</div>
         </>
     )
 }
@@ -48,5 +48,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default WithRestoService()(connect(mapStateToProps)(BestsellersListItem));
-//export default BestsellersListItem;
+export default WithDiplomaService()(connect(mapStateToProps)(BestsellersListItem));

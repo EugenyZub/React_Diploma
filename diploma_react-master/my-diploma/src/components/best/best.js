@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import WithRestoService from '../hoc';
+import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
 import Spinner from '../spinner';
 import BestsellersListItem from '../bestsellers-list-item';
@@ -9,8 +9,8 @@ class Best extends Component {
 
     componentDidMount() {
         this.props.itemsRequested();
-        const {RestoService} = this.props;
-        RestoService.getBestsellers()
+        const {DiplomaService} = this.props;
+        DiplomaService.getBestsellers()
             .then(res => this.props.itemsLoaded(res))
             .catch(() => this.props.itemsError())
     }
@@ -70,4 +70,4 @@ const mapDispatchToProps = {
     itemsDetails
 };
 
-export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(Best));
+export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(Best));

@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import AppHeader from '../app-header';
-// import './coffeepage.sass';
 import AppFooter from '../app-footer';
 import GoodsListItem from '../pleasure-list-item';
 import {connect} from 'react-redux';
-import WithRestoService from '../hoc';
+import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
 import Spinner from '../spinner';
 
@@ -101,4 +100,4 @@ const mapDispatchToProps = {
     itemsError,
 };
 
-export default WithRestoService()(connect(mapStateToProps, mapDispatchToProps)(Pleasure));
+export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(Pleasure));
