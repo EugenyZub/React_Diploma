@@ -31,10 +31,18 @@ const searchForm = (value) => {
     }
 }
 
+const filterItems = (filterName) => {
+    return {
+        type: 'ITEMS_FILTER',
+        filterName
+    }
+}
+
 export {
     itemsLoaded,
     itemsRequested,
     itemsError,
     itemsDetails,
-    searchForm
+    searchForm,
+    filterItems
 };

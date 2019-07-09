@@ -27,6 +27,7 @@ class CoffeePage extends Component {
     
     render() {
         const {loading, error, itemsDetails, searchForm, curentArr} = this.props;
+        
         const view = error ? <Error/> : loading ? <Spinner/> : 
                     !(loading || error) && <CofItm itemsDetails={itemsDetails}
                                                    searchForm={searchForm}

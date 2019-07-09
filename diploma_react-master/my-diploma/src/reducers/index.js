@@ -53,6 +53,15 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 curentArr: curentArray
             };
+        case 'ITEMS_FILTER': 
+            const filterName = action.filterName;
+            const filtredArray = state.items.filter(item => item.country === filterName);
+
+            return {
+                ...state,
+                curentArr: filtredArray 
+            };
+
         default: 
             return state;
     }
