@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
+import SearchPanel from '../search-panel';
+import Filter from '../filter/';
 import WithDiplomaService from '../hoc';
-import {itemsLoaded, itemsRequested, itemsError, itemsDetails, searchForm} from '../../actions';
+import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
 import Spinner from '../spinner';
 import Error from '../error';
 import CofeeItemList from '../coffee-list-item';
@@ -24,7 +26,7 @@ class CoffeePage extends Component {
     }
     
     render() {
-        const {coffeeItems, loading, error, itemsDetails, value} = this.props;
+        const {coffeeItems, loading, error, itemsDetails} = this.props;
 
         const view = error ? <Error/> : loading ? <Spinner/> : 
                     !(loading || error) && <CofItm coffeeItems={coffeeItems} itemsDetails={itemsDetails}/>; 
@@ -59,7 +61,9 @@ class CoffeePage extends Component {
                         </div>
                         <div className="line"></div>
                         <div className="row">
-                            <div className="col-lg-4 offset-2">
+                            <SearchPanel/>
+                            <Filter/>
+                            {/* <div className="col-lg-4 offset-2">
                                 <form
                                     className="shop__search"
                                     onChange={e => searchForm(e.target.value)}
@@ -68,8 +72,8 @@ class CoffeePage extends Component {
                                     <label className="shop__search-label" forhtml="filter">Looking for</label>
                                     <input id="filter" type="text" placeholder="start typing here..." className="shop__search-input"/>
                                 </form>
-                            </div>
-                            <div className="col-lg-4">
+                            </div> */}
+                            {/* <div className="col-lg-4">
                                 <div className="shop__filter">
                                     <div className="shop__filter-label">
                                         Or filter
@@ -80,7 +84,7 @@ class CoffeePage extends Component {
                                         <button className="shop__filter-btn" >Columbia</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
@@ -117,9 +121,7 @@ const mapStateToProps = (state) => {
     return {
         coffeeItems: state.items,
         loading: state.loading,
-        error: state.error,
-        value: state.works.value,
-        works: state.works.works
+        error: state.error
     }
 }
 
@@ -127,8 +129,7 @@ const mapDispatchToProps = {
     itemsLoaded,
     itemsRequested,
     itemsError,
-    itemsDetails,
-    searchForm
+    itemsDetails
 };
 
 export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(CoffeePage));
