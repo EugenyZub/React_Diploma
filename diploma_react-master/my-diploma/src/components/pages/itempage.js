@@ -2,22 +2,27 @@ import React, {Component} from 'react';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
 import WithDiplomaService from '../hoc';
-import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
+import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
 import {connect} from 'react-redux';
 import ItemDetails from '../itemDetails/';
 
 class ItemPage extends Component {
-    // componentDidMount() {
-    //     this.props.itemsRequested();
-    //     const {RestoService} = this.props;
-    //     RestoService.getCoffee()
-    //         .then(res => this.props.itemsLoaded(res))
-    //         .catch(() => this.props.itemsError())
-    // }
+    componentDidMount() {
+        const {itemsDetails} = this.props;
+        const curentItem = itemsDetails.map(item => item.url.slice(item.url.indexOf('I') + 2, 
+                                                                   item.url.indexOf('_') - 1)).toString();
+        this.props.itemsRequested();
+        const {DiplomaService} = this.props;
+        DiplomaService.getCoffee()        
+            .then(res => { 
+                        const newItem = res.filter(item => item.url.slice(item.url.indexOf('I') + 2,
+                                                                          item.url.indexOf('_') - 1) === curentItem)
+                        this.props.itemsLoaded(newItem); })
+            .catch(() => this.props.itemsError())
+    }
 
     render() {
         const {itemsDetails} = this.props;
-        //let id = 0;
 
         return (
             <>
@@ -32,8 +37,7 @@ class ItemPage extends Component {
                         <div className="row">
                             {
                                 itemsDetails.map(itemDetails => {
-                                    const id = itemDetails.url.slice(itemDetails.url.indexOf('I') + 2, itemDetails.url.indexOf('_') - 1);
-                                    console.log(itemDetails)
+                                    const id = itemDetails.url.slice(itemDetails.url.indexOf('I') + 2, itemDetails.url.indexOf('_') - 1);                                  
                                     return <ItemDetails 
                                         key={id}
                                         itemDetails={itemDetails}

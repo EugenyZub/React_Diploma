@@ -20,7 +20,6 @@ class CoffeePage extends Component {
 
     render() {
         const {coffeeItems, loading, error, itemsDetails, value, works} = this.props;
-        let id = 0; 
 
         if (loading) {
             return <Spinner/>
@@ -91,10 +90,12 @@ class CoffeePage extends Component {
                                     {   
                                             
                                             coffeeItems.map(coffeeItem => {
+                                                const id = coffeeItem.url.slice(coffeeItem.url.indexOf('I') + 2,
+                                                                                coffeeItem.url.indexOf('_') - 1);
                                                 return <CofeeItemList 
-                                                    key={id++}
+                                                    key={id}
                                                     coffeeItem={coffeeItem}
-                                                    moreDetails={() => itemsDetails(coffeeItem.id)}
+                                                    moreDetails={() => itemsDetails(id)}
                                                 />
                                             })
                                         }

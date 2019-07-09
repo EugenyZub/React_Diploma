@@ -19,8 +19,8 @@ const itemsError = () => {
 
 const itemsDetails = (id) => {
     return {
-        type: 'ITEM_DETAILS',
-        payload: id
+        type: 'ITEMS_DETAILS',
+        id
     }
 }
 

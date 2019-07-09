@@ -16,7 +16,7 @@ class Best extends Component {
     }
 
    render() {
-        const {bestsellersItems, error, loading} = this.props;   
+        const {bestsellersItems, itemsDetails, error, loading} = this.props;   
 
         if (loading) {
             return <Spinner/>
@@ -37,12 +37,12 @@ class Best extends Component {
                             <div className="best__wrapper">
                                 {                             
                                     bestsellersItems.map(bestsellersItem => {
-                                        const id = bestsellersItem.url.slice(bestsellersItem.url.indexOf('I') + 2, bestsellersItem.url.indexOf('_') - 1)
+                                        const id = bestsellersItem.url.slice(bestsellersItem.url.indexOf('I') + 2,
+                                                                             bestsellersItem.url.indexOf('_') - 1);
                                         return  <BestsellersListItem
                                                     key={id} 
                                                     bestsellersItem={bestsellersItem}
-                                                    error={error}
-                                                    moreDetails={() => itemsDetails(bestsellersItem.id)}
+                                                    moreDetails={() => itemsDetails(id)}
                                                 />
                                     })
                                 }
@@ -59,7 +59,7 @@ const mapStateToProps = (state) => {
     return {
         bestsellersItems: state.items,
         error: state.error,
-        loading: state.loading
+        loading: state.loading,
     }
 }
 

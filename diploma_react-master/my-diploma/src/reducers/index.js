@@ -26,21 +26,23 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 error: true
             };       
-        case 'ITEM_DETAILS': 
-            //const id = action.payload;
-            //const item = state.items.find(item => item.id === id);
+        case 'ITEMS_DETAILS': 
+            const id = action.id;
 
-            // const newItem = {
-            //     name: item.name,
-            //     price: item.price,
-            //     url: item.url,
-            //     id: item.id
-            // };
+            const item = state.items.find(item => item.url.slice(item.url.indexOf('I') + 2,item.url.indexOf('_') - 1) === id);
+            
+            const newItem = {
+                name: item.name,
+                price: item.price,
+                url: item.url,
+                description: item.description,
+                country: item.country
+            };
             return {
                 ...state,
-                // items: [
-                //     newItem
-                // ]
+                items: [
+                    newItem
+                ]
             };
         case 'ITEM_SEACRCH':
             const {value} = action;

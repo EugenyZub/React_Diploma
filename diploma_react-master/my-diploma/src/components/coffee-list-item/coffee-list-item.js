@@ -5,10 +5,11 @@ const CoffeeItemList = ({coffeeItem, moreDetails}) => {
     const {name, country, price, url} = coffeeItem;
 
     return (
-        <div onClick={() => moreDetails()}
-            //to='/itempage'
+        <Link 
+            to='/itempage'
+            onClick={() => moreDetails()}
             className="shop__item"
-            // style={{textDecoration: 'none'}}
+            style={{textDecoration: 'none'}}
         >
             <img src={url} alt={name}/>
             <div className="shop__item-title">
@@ -16,7 +17,7 @@ const CoffeeItemList = ({coffeeItem, moreDetails}) => {
             </div>
             <div className="shop__item-country">{country}</div>
             <div className="shop__item-price">{price}</div>
-        </div>
+        </Link>
     )   
 } 
 

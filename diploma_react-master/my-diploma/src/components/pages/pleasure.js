@@ -11,8 +11,8 @@ class Pleasure extends Component {
 
     componentDidMount() {
         this.props.itemsRequested();
-        const {RestoService} = this.props;
-        RestoService.getGoods()
+        const {DiplomaService} = this.props;
+        DiplomaService.getGoods()
             .then(res => this.props.itemsLoaded(res))
             .catch(() => this.props.itemsError())
     }
