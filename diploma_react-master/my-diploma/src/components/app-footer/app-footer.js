@@ -10,7 +10,7 @@ const AppFooter = () => {
                   <div className="col-lg-5 offset-lg-4">
                       <ul className="footer">
                           <li className="footer__item">
-                            <Link exact to="/">
+                            <Link to="/">
                                 <img src="../../logo/Logo_black.svg" alt="logo"/>
                             </Link>
                           </li>
