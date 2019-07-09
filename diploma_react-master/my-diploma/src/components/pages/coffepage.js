@@ -3,7 +3,8 @@ import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError, itemsDetails, searchForm} from '../../actions';
-import Spinner from '../spinner'
+import Spinner from '../spinner';
+import Error from '../error';
 import CofeeItemList from '../coffee-list-item';
 import {connect} from 'react-redux';
 
@@ -18,18 +19,15 @@ class CoffeePage extends Component {
             .catch(() => this.props.itemsError())
     }
 
+    componentDidCatch() {
+        return <Error/>
+    }
+    
     render() {
         const {coffeeItems, loading, error, itemsDetails, value} = this.props;
 
-        if (loading) {
-            return <Spinner/>
-        }
-
-        if (error) {
-            return (
-                <div className='whiteText'>Возникла непредвиденная ошибка!</div>
-            )
-        }
+        const view = error ? <Error/> : loading ? <Spinner/> : 
+                    !(loading || error) && <CofItm coffeeItems={coffeeItems} itemsDetails={itemsDetails}/>; 
 
         return (
             <>
@@ -87,18 +85,7 @@ class CoffeePage extends Component {
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="shop__wrapper">
-                                    {   
-                                            
-                                            coffeeItems.map(coffeeItem => {
-                                                const id = coffeeItem.url.slice(coffeeItem.url.indexOf('I') + 2,
-                                                                                coffeeItem.url.indexOf('_') - 1);
-                                                return <CofeeItemList 
-                                                    key={id}
-                                                    coffeeItem={coffeeItem}
-                                                    moreDetails={() => itemsDetails(id)}
-                                                />
-                                            })
-                                        }
+                                    {view}
                                 </div>
                             </div>
                         </div>
@@ -110,6 +97,20 @@ class CoffeePage extends Component {
             </>
         )
    }
+}
+
+const CofItm = ({coffeeItems, itemsDetails}) => {
+    return (
+        coffeeItems.map(coffeeItem => {
+            const id = coffeeItem.url.slice(coffeeItem.url.indexOf('I') + 2,
+                                            coffeeItem.url.indexOf('_') - 1);
+            return <CofeeItemList 
+                key={id}
+                coffeeItem={coffeeItem}
+                moreDetails={() => itemsDetails(id)}
+            />
+        })
+    )
 }
 
 const mapStateToProps = (state) => {

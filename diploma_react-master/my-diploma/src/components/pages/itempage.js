@@ -5,13 +5,15 @@ import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
 import {connect} from 'react-redux';
 import ItemDetails from '../itemDetails/';
+import Spinner from '../spinner';
+import Error from '../error';
 
 class ItemPage extends Component {
     componentDidMount() {
+        this.props.itemsRequested();
         const {itemsDetails} = this.props;
         const curentItem = itemsDetails.map(item => item.url.slice(item.url.indexOf('I') + 2, 
                                                                    item.url.indexOf('_') - 1)).toString();
-        this.props.itemsRequested();
         const {DiplomaService} = this.props;
         DiplomaService.getCoffee()        
             .then(res => { 
@@ -21,8 +23,15 @@ class ItemPage extends Component {
             .catch(() => this.props.itemsError())
     }
 
+    componentDidCatch() {
+        return <Error/>
+    }
+    
     render() {
-        const {itemsDetails} = this.props;
+        const {itemsDetails, loading, error} = this.props;
+
+        const view = error ? <Error/> : loading ? <Spinner/> : 
+                    !(loading || error) && <ItmDetails itemsDetails={itemsDetails}/>
 
         return (
             <>
@@ -35,7 +44,8 @@ class ItemPage extends Component {
                 <section className="shop">
                     <div className="container">
                         <div className="row">
-                            {
+                            {view}
+                            {/* {
                                 itemsDetails.map(itemDetails => {
                                     const id = itemDetails.url.slice(itemDetails.url.indexOf('I') + 2, itemDetails.url.indexOf('_') - 1);                                  
                                     return <ItemDetails 
@@ -43,30 +53,7 @@ class ItemPage extends Component {
                                         itemDetails={itemDetails}
                                     />
                                 })
-                            }
-    
-    
-                            {/* <div className="col-lg-5 offset-1">
-                                <img className="shop__girl" src="../../img/coffee_item.jpg" alt="coffee_item"/>
-                            </div>
-                            <div className="col-lg-4">
-                                <div className="title">About it</div>
-                                <img className="beanslogo" src="../../logo/Beans_logo_dark.svg" alt="Beans logo"/>
-                                <div className="shop__point">
-                                    <span>Country: </span>
-                                    Brazil
-                                </div>
-                                <div className="shop__point">
-                                    <span>Description: </span>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </div>
-                                <div className="shop__point">
-                                    <span>Price: </span>
-                                    <span className="shop__point-price">16.99$</span>
-                                </div>
-                            </div> */}
-    
+                            }   */}
                         </div>
                     </div>
                 </section>
@@ -78,6 +65,19 @@ class ItemPage extends Component {
     }
     
 }
+
+const ItmDetails = ({itemsDetails}) => {
+    return (
+        itemsDetails.map(itemDetails => {
+            const id = itemDetails.url.slice(itemDetails.url.indexOf('I') + 2, itemDetails.url.indexOf('_') - 1);                                  
+            return <ItemDetails 
+                key={id}
+                itemDetails={itemDetails}
+            />
+        })
+    )
+}
+
 const mapStateToProps = (state) => {
     return {
         itemsDetails: state.items,

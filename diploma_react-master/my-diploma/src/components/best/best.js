@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
 import Spinner from '../spinner';
+import Error from '../error';
 import BestsellersListItem from '../bestsellers-list-item';
 class Best extends Component {
 
@@ -14,20 +15,16 @@ class Best extends Component {
             .then(res => this.props.itemsLoaded(res))
             .catch(() => this.props.itemsError())
     }
-
-   render() {
+    
+    componentDidCatch() {
+        return <Error/>
+    }
+    
+    render() {
         const {bestsellersItems, itemsDetails, error, loading} = this.props;   
 
-        if (loading) {
-            return <Spinner/>
-        }
-
-        if (error) {
-            return (
-                <div className='whiteText'>Возникла непредвиденная ошибка!</div>
-            )
-        }
-
+        const view = error ? <Error/> : loading ? <Spinner/> : 
+                    !(loading || error) && <Bestsellers bestsellersItems={bestsellersItems} itemsDetails={itemsDetails}/>; 
         return (
             <section className="best">
                 <div className="container">
@@ -35,17 +32,7 @@ class Best extends Component {
                     <div className="row">
                         <div className="col-lg-10 offset-lg-1">
                             <div className="best__wrapper">
-                                {                             
-                                    bestsellersItems.map(bestsellersItem => {
-                                        const id = bestsellersItem.url.slice(bestsellersItem.url.indexOf('I') + 2,
-                                                                             bestsellersItem.url.indexOf('_') - 1);
-                                        return  <BestsellersListItem
-                                                    key={id} 
-                                                    bestsellersItem={bestsellersItem}
-                                                    moreDetails={() => itemsDetails(id)}
-                                                />
-                                    })
-                                }
+                                {view}
                             </div>
                         </div>
                     </div>
@@ -53,6 +40,20 @@ class Best extends Component {
             </section>
         )
    }
+}
+
+const Bestsellers = ({bestsellersItems, itemsDetails}) => {
+    return (
+        bestsellersItems.map(bestsellersItem => {
+            const id = bestsellersItem.url.slice(bestsellersItem.url.indexOf('I') + 2,
+                                                 bestsellersItem.url.indexOf('_') - 1);
+            return  <BestsellersListItem
+                        key={id} 
+                        bestsellersItem={bestsellersItem}
+                        moreDetails={() => itemsDetails(id)}
+                    />
+        })
+    )
 }
 
 const mapStateToProps = (state) => {

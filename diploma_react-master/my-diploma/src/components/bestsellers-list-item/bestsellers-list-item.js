@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 // import Spinner from '../spinner';
-import Error from '../error';
+// import Error from '../error';
 import {connect} from 'react-redux';
 import WithDiplomaService from '../hoc';
 // import {itemsDetails} from '../../actions';
 import {Link} from 'react-router-dom';
 class BestsellersListItem extends Component {
-
-    componentDidCatch() {
-        return <Error/>
-    }
 
     render () {
         const {bestsellersItem, moreDetails} = this.props;
@@ -22,6 +18,7 @@ class BestsellersListItem extends Component {
                 className="best__item" 
                 style={{textDecoration: 'none'}}
             >
+                
                 {/* {view} */}
                 <View bestsellersItem={bestsellersItem}/>
             </Link>

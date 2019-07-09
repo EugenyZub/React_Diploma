@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
 import Spinner from '../spinner';
+import Error from '../error';
 
 class Pleasure extends Component {
 
@@ -17,19 +18,15 @@ class Pleasure extends Component {
             .catch(() => this.props.itemsError())
     }
 
+    componentDidCatch() {
+        return <Error/>
+    }
+
     render () {
         const {goods, error, loading} = this.props;
-        let id = 0;   
 
-        if (loading) {
-                return <Spinner/>
-        }
-
-        if (error) {
-            return (
-                <div className='whiteText'>Возникла непредвиденная ошибка!</div>
-            )
-        }
+        const view = error ? <Error/> : loading ? <Spinner/> : 
+                    !(loading || error) && <Goods goods={goods}/>; 
 
         return (
             <>
@@ -63,15 +60,7 @@ class Pleasure extends Component {
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
                                 <div className="shop__wrapper">
-                                    {                             
-                                        goods.map(goodsItem => {
-                                            return  <GoodsListItem
-                                                        key={id++} 
-                                                        goodsItem={goodsItem}
-                                                        error={error}
-                                                    />
-                                        })
-                                    }
+                                    {view}
                                 </div>
                             </div>
                         </div>
@@ -86,6 +75,19 @@ class Pleasure extends Component {
     
 }
 
+const Goods = ({goods}) => {
+    return (
+        goods.map(goodsItem => {
+            const id = goodsItem.url.slice(goodsItem.url.indexOf('I') + 2,
+                                           goodsItem.url.indexOf('_') - 1);
+            return  <GoodsListItem
+                        key={id} 
+                        goodsItem={goodsItem}
+                    />
+        })
+    )
+}
+
 const mapStateToProps = (state) => {
     return {
         goods: state.items,
@@ -97,7 +99,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     itemsLoaded,
     itemsRequested,
-    itemsError,
+    itemsError
 };
 
 export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(Pleasure));
