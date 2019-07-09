@@ -4,7 +4,7 @@ import AppFooter from '../app-footer';
 import SearchPanel from '../search-panel';
 import Filter from '../filter/';
 import WithDiplomaService from '../hoc';
-import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
+import {itemsLoaded, itemsRequested, itemsError, itemsDetails, searchForm} from '../../actions';
 import Spinner from '../spinner';
 import Error from '../error';
 import CofeeItemList from '../coffee-list-item';
@@ -26,10 +26,11 @@ class CoffeePage extends Component {
     }
     
     render() {
-        const {coffeeItems, loading, error, itemsDetails} = this.props;
-
+        const {loading, error, itemsDetails, searchForm, curentArr} = this.props;
         const view = error ? <Error/> : loading ? <Spinner/> : 
-                    !(loading || error) && <CofItm coffeeItems={coffeeItems} itemsDetails={itemsDetails}/>; 
+                    !(loading || error) && <CofItm itemsDetails={itemsDetails}
+                                                   searchForm={searchForm}
+                                                   curentArr={curentArr}/>; 
 
         return (
             <>
@@ -63,28 +64,6 @@ class CoffeePage extends Component {
                         <div className="row">
                             <SearchPanel/>
                             <Filter/>
-                            {/* <div className="col-lg-4 offset-2">
-                                <form
-                                    className="shop__search"
-                                    onChange={e => searchForm(e.target.value)}
-                                    value={value}
-                                >
-                                    <label className="shop__search-label" forhtml="filter">Looking for</label>
-                                    <input id="filter" type="text" placeholder="start typing here..." className="shop__search-input"/>
-                                </form>
-                            </div> */}
-                            {/* <div className="col-lg-4">
-                                <div className="shop__filter">
-                                    <div className="shop__filter-label">
-                                        Or filter
-                                    </div>
-                                    <div className="shop__filter-group">
-                                        <button className="shop__filter-btn" >Brazil</button>
-                                        <button className="shop__filter-btn" >Kenya</button>
-                                        <button className="shop__filter-btn" >Columbia</button>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
@@ -103,25 +82,24 @@ class CoffeePage extends Component {
    }
 }
 
-const CofItm = ({coffeeItems, itemsDetails}) => {
-    return (
-        coffeeItems.map(coffeeItem => {
-            const id = coffeeItem.url.slice(coffeeItem.url.indexOf('I') + 2,
-                                            coffeeItem.url.indexOf('_') - 1);
-            return <CofeeItemList 
-                key={id}
-                coffeeItem={coffeeItem}
-                moreDetails={() => itemsDetails(id)}
-            />
-        })
-    )
+const CofItm = ({curentArr, itemsDetails}) => {
+    return curentArr.map(coffeeItem => {
+        const id = coffeeItem.url.slice(coffeeItem.url.indexOf('I') + 2,
+                                        coffeeItem.url.indexOf('_') - 1);
+        return <CofeeItemList 
+            key={id}
+            coffeeItem={coffeeItem}
+            moreDetails={() => itemsDetails(id)}
+        />
+    })
 }
 
 const mapStateToProps = (state) => {
     return {
         coffeeItems: state.items,
         loading: state.loading,
-        error: state.error
+        error: state.error,
+        curentArr: state.curentArr
     }
 }
 
@@ -129,7 +107,8 @@ const mapDispatchToProps = {
     itemsLoaded,
     itemsRequested,
     itemsError,
-    itemsDetails
+    itemsDetails,
+    searchForm
 };
 
 export default WithDiplomaService()(connect(mapStateToProps, mapDispatchToProps)(CoffeePage));

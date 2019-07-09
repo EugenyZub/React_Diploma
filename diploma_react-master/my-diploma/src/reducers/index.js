@@ -1,9 +1,9 @@
 const initialState = {
     items: [],
+    curentArr: [],
     loading: true,
     error: false,
-    value: '',
-    works: []
+    value: ''  
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +12,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 items: action.payload,
+                curentArr: action.payload,
                 loading: false
             };
         case 'ITEMS_REQUESTED':
@@ -44,14 +45,13 @@ const reducer = (state = initialState, action) => {
                     newItem
                 ]
             };
-        case 'ITEM_SEACRCH':
-            const {value} = action;
-            console.log(value);
-            const works = state.items.filter(val => val.includes(value)); 
+        case 'ITEM_SEARCH':
+            const value = action.value;
+            const curentArray = state.items.filter(item => item.name.toLowerCase().includes(value.toLowerCase())); 
+
             return {
                 ...state,
-                value,
-                works
+                curentArr: curentArray
             };
         default: 
             return state;

@@ -50,7 +50,7 @@ const Bestsellers = ({bestsellersItems, itemsDetails}) => {
             return  <BestsellersListItem
                         key={id} 
                         bestsellersItem={bestsellersItem}
-                        moreDetails={() => itemsDetails(id)}
+                        moreDetails={() => itemsDetails(id)}                       
                     />
         })
     )

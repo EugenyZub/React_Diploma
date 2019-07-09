@@ -1,7 +1,7 @@
-const itemsLoaded = (newMenu) => {
+const itemsLoaded = (newItem) => {
     return {
         type: 'ITEMS_LOADED',
-        payload: newMenu
+        payload: newItem
     };
 };
 
@@ -26,7 +26,7 @@ const itemsDetails = (id) => {
 
 const searchForm = (value) => {
     return {
-        type: 'ITEM_SEACRCH',
+        type: 'ITEM_SEARCH',
         value
     }
 }
