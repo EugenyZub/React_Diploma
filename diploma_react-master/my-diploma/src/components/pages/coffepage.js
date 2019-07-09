@@ -19,7 +19,7 @@ class CoffeePage extends Component {
     }
 
     render() {
-        const {coffeeItems, loading, error, itemsDetails, value, works} = this.props;
+        const {coffeeItems, loading, error, itemsDetails, value} = this.props;
 
         if (loading) {
             return <Spinner/>
