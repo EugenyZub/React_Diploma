@@ -3,7 +3,6 @@ import {Route, Switch} from 'react-router-dom';
 import {CoffeePage, Main, Pleasure, ItemPage} from '../pages';
 
 const App  = () => {
-   // render() {
         return (
             <>
                 <Switch>
@@ -14,7 +13,6 @@ const App  = () => {
                 </Switch>
             </>
         )
-   // }
 }
 
 export default App;

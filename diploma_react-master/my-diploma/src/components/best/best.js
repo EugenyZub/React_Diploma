@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError, itemsDetails} from '../../actions';
@@ -60,7 +59,7 @@ const mapStateToProps = (state) => {
     return {
         bestsellersItems: state.items,
         error: state.error,
-        loading: state.loading,
+        loading: state.loading
     }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import './footer.sass';
 import {Link} from 'react-router-dom';
+
+import './footer.sass';
 
 const AppFooter = () => {
     return (

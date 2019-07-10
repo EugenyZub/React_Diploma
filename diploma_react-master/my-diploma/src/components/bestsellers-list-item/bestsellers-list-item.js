@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import WithDiplomaService from '../hoc';
 import {Link} from 'react-router-dom';
+import WithDiplomaService from '../hoc';
+
 class BestsellersListItem extends Component {
 
     render () {

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
+import ItemDetails from '../itemDetails/';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
-import {connect} from 'react-redux';
-import ItemDetails from '../itemDetails/';
 import Spinner from '../spinner';
 import Error from '../error';
 
@@ -45,15 +45,6 @@ class ItemPage extends Component {
                     <div className="container">
                         <div className="row">
                             {view}
-                            {/* {
-                                itemsDetails.map(itemDetails => {
-                                    const id = itemDetails.url.slice(itemDetails.url.indexOf('I') + 2, itemDetails.url.indexOf('_') - 1);                                  
-                                    return <ItemDetails 
-                                        key={id}
-                                        itemDetails={itemDetails}
-                                    />
-                                })
-                            }   */}
                         </div>
                     </div>
                 </section>

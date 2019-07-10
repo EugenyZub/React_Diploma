@@ -1,6 +1,7 @@
 import React from 'react';
-import './header.sass';
 import {Link} from 'react-router-dom';
+
+import './header.sass';
 
 const AppHeader = () => {
     return (

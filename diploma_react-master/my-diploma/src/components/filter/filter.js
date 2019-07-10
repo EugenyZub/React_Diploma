@@ -26,9 +26,9 @@ class Filter extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        bestsellersItems: state.items,
-        error: state.error,
-        loading: state.loading
+        // bestsellersItems: state.items,
+        // error: state.error,
+        // loading: state.loading
     }
 }
 

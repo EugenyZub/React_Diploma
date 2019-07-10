@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
 import SearchPanel from '../search-panel';
 import Filter from '../filter/';
+import CofeeItemList from '../coffee-list-item';
+import TextBlock from '../text-block';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError, itemsDetails, searchForm} from '../../actions';
 import Spinner from '../spinner';
 import Error from '../error';
-import CofeeItemList from '../coffee-list-item';
-import {connect} from 'react-redux';
 
 import './coffeepage.sass';
 
@@ -43,7 +44,12 @@ class CoffeePage extends Component {
                 </div>
                 <section className="shop">
                     <div className="container">
-                        <div className="row">
+                        <TextBlock 
+                            textTitle='About our beans' 
+                            imgUrl='../../img/coffee_girl.jpg' 
+                            imgAlt='girl'
+                        />
+                        {/* <div className="row">
                             <div className="col-lg-4 offset-2">
                                 <img className="shop__girl" src="../../img/coffee_girl.jpg" alt="girl"/>
                             </div>
@@ -60,7 +66,7 @@ class CoffeePage extends Component {
                                     is song that held help face.
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="line"></div>
                         <div className="row">
                             <SearchPanel/>

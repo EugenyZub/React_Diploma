@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
 import About from '../about';
 import Best from '../best';
-import {Link} from 'react-router-dom';
 import Error from '../error';
 
 import './mainpage.sass';
+
 class Main extends Component {
     componentDidCatch() {
         return <Error/>

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import AppHeader from '../app-header';
 import AppFooter from '../app-footer';
+import TextBlock from '../text-block';
 import GoodsListItem from '../pleasure-list-item';
-import {connect} from 'react-redux';
 import WithDiplomaService from '../hoc';
 import {itemsLoaded, itemsRequested, itemsError} from '../../actions';
 import Spinner from '../spinner';
@@ -19,6 +20,7 @@ class Pleasure extends Component {
     }
 
     componentDidCatch() {
+        //this.props.itemsError();
         return <Error/>
     }
 
@@ -38,7 +40,12 @@ class Pleasure extends Component {
                 </div>
                 <section className="shop">
                     <div className="container">
-                        <div className="row">
+                        <TextBlock 
+                            textTitle='Our best' 
+                            imgUrl='../../img/pleasure.jpg' 
+                            imgAlt='pleasure'
+                        />
+                        {/* <div className="row">               
                             <div className="col-lg-4 offset-2">
                                 <img className="shop__girl" src="../../img/pleasure.jpg" alt="pleasure"/>
                             </div>
@@ -55,7 +62,7 @@ class Pleasure extends Component {
                                     is song that held help face.
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="line"></div>                      
                         <div className="row">
                             <div className="col-lg-10 offset-lg-1">
@@ -71,8 +78,7 @@ class Pleasure extends Component {
                 </AppFooter>
             </>
         )
-    }
-    
+    }   
 }
 
 const Goods = ({goods}) => {
